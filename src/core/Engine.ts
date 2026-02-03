@@ -257,12 +257,9 @@ export class Engine {
       this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
     }
 
-    // 카메라 변환 적용 및 씬 렌더링
+    // 씬 렌더링 (카메라 변환은 각 Layer가 처리)
     if (this._currentScene !== null) {
-      this._ctx.save();
-      this._currentScene.camera.applyTransform(this._ctx);
       this._currentScene.render(this._ctx);
-      this._ctx.restore();
     }
   }
 

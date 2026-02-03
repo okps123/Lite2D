@@ -285,9 +285,6 @@ export class Dialog extends UIElement {
   onRender(ctx: CanvasRenderingContext2D): void {
     ctx.save();
 
-    // Screen Space (카메라 변환 무시)
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-
     // 배경 딤 렌더링
     if (this._dimBackground) {
       ctx.fillStyle = this._dimColor;

@@ -410,11 +410,6 @@ export class InputBox extends UIElement {
   onRender(ctx: CanvasRenderingContext2D): void {
     ctx.save();
 
-    // Screen Space인 경우 카메라 변환 무시
-    if (this._screenSpace) {
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-    }
-
     // 투명도 적용
     ctx.globalAlpha = this._opacity;
 

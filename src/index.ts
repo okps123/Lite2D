@@ -7,6 +7,7 @@
 export { Engine } from './core/Engine';
 export { GameObject } from './core/GameObject';
 export { Scene } from './core/Scene';
+export { Layer } from './core/Layer';
 export { Transform } from './core/Transform';
 export { Component } from './core/Component';
 

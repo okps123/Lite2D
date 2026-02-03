@@ -7,9 +7,10 @@ Lite2D는 2D 픽셀 기반 웹 게임을 위한 경량 게임 프레임워크입
 1. [아키텍처](architecture.md) - 프레임워크 구조 및 설계
 2. [API 문서](api.md) - 클래스 및 메서드 레퍼런스
 3. [게임 루프](gameloop.md) - Update/Render 루프 동작 방식
-4. [물리 시스템](physics.md) - 2D 물리 엔진 및 충돌 처리
-5. [오디오 시스템](audio.md) - 사운드 재생 및 관리
-6. [튜토리얼](tutorial.md) - 시작하기 가이드
+4. [레이어 시스템](layer.md) - World/Screen Space 렌더링 분리
+5. [물리 시스템](physics.md) - 2D 물리 엔진 및 충돌 처리
+6. [오디오 시스템](audio.md) - 사운드 재생 및 관리
+7. [튜토리얼](tutorial.md) - 시작하기 가이드
 
 ## 특징
 
@@ -30,6 +31,7 @@ Lite2D는 2D 픽셀 기반 웹 게임을 위한 경량 게임 프레임워크입
 - **Engine**: 게임 루프 및 엔진 관리
 - **GameObject**: 모든 게임 오브젝트의 베이스 클래스
 - **Scene**: 게임 씬 관리
+- **Layer**: 렌더링 레이어 (World/Screen Space 분리)
 - **Transform**: 위치/회전/스케일 관리
 - **Component**: 확장 가능한 컴포넌트 시스템
 

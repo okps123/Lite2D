@@ -1,4 +1,5 @@
 import { GameObject } from './GameObject';
+import { Layer } from './Layer';
 import { Camera } from '../rendering/Camera';
 import type { Engine } from './Engine';
 
@@ -15,9 +16,36 @@ export class Scene {
   private _backgroundColor: string = '#000000';
   private _engine: Engine | null = null;
 
+  // 기본 레이어
+  private _worldLayer: Layer;
+  private _uiLayer: Layer;
+
   constructor(name: string, viewportWidth: number, viewportHeight: number) {
     this._name = name;
     this._camera = new Camera(viewportWidth, viewportHeight);
+
+    // 기본 레이어 생성
+    this._worldLayer = new Layer('World', this._camera);
+    this._uiLayer = new Layer('UI', null);
+    this._uiLayer.sortingOrder = 1000;
+
+    // 씬에 추가
+    this.addGameObject(this._worldLayer);
+    this.addGameObject(this._uiLayer);
+  }
+
+  /**
+   * World Layer (카메라 변환 적용)
+   */
+  get world(): Layer {
+    return this._worldLayer;
+  }
+
+  /**
+   * UI Layer (Screen Space)
+   */
+  get ui(): Layer {
+    return this._uiLayer;
   }
 
   /**
@@ -284,6 +312,32 @@ export class Scene {
       count += this.countObjectsRecursive(child);
     }
     return count;
+  }
+
+  /**
+   * World Layer 생성 헬퍼
+   * 씬의 카메라가 적용되는 레이어를 생성하고 씬에 추가합니다.
+   * @param name 레이어 이름 (기본값: 'World')
+   * @returns 생성된 Layer
+   */
+  createWorldLayer(name: string = 'World'): Layer {
+    const layer = new Layer(name, this._camera);
+    this.addGameObject(layer);
+    return layer;
+  }
+
+  /**
+   * UI Layer 생성 헬퍼
+   * Screen Space 레이어를 생성하고 씬에 추가합니다.
+   * @param name 레이어 이름 (기본값: 'UI')
+   * @param sortingOrder 렌더링 순서 (기본값: 1000)
+   * @returns 생성된 Layer
+   */
+  createUILayer(name: string = 'UI', sortingOrder: number = 1000): Layer {
+    const layer = new Layer(name, null);
+    layer.sortingOrder = sortingOrder;
+    this.addGameObject(layer);
+    return layer;
   }
 
   /**

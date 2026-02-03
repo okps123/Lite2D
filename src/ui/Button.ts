@@ -241,11 +241,6 @@ export class Button extends UIElement {
   onRender(ctx: CanvasRenderingContext2D): void {
     ctx.save();
 
-    // Screen Space인 경우 카메라 변환 무시
-    if (this._screenSpace) {
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-    }
-
     // 현재 스타일 가져오기
     const style = this.getCurrentStyle();
 
@@ -288,11 +283,8 @@ export class Button extends UIElement {
       this._label.textColor = style.textColor;
       this._label.screenSpace = this._screenSpace;
 
-      // Label 렌더링 (별도의 save/restore 없이)
-      ctx.save();
-      ctx.setTransform(1, 0, 0, 1, 0, 0); // 초기화
+      // Label 렌더링
       this._label.onRender(ctx);
-      ctx.restore();
     } else if (this._image) {
       // 이미지 버튼
       const imgX = bounds.x + (bounds.width - this._imageWidth) / 2;
